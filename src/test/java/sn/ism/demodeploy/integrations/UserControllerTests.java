@@ -1,4 +1,4 @@
-package me.essejacques.demotestdeploy.integrations;
+package sn.ism.demodeploy.integrations;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -20,26 +20,32 @@ public class UserControllerTests {
     @Test
     public void findAllUsers() throws Exception {
         mockMvc.perform(get("/users"))
-                .andExpect( status().isOk())
-                .andExpect( jsonPath( "$.length()").value(3))
                 .andExpect(
-                        jsonPath( "$.[0].name").value("Jordane")
+                        status().isOk()
+                )
+                .andExpect(
+                        jsonPath("$.length()").value(3)
+                )
+                .andExpect(
+                        jsonPath("$.[0].name").value("John")
                 );
-
     }
 
     @Test
-    public  void createUser() throws Exception {
+    public void createUser() throws Exception{
         mockMvc.perform(
-                post("/users"  )
+                post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{" +
-                                "\"name\":\"Saint\"," +
-                                "\"email\":\"Saint@gmail.com\"," +
+                                "\"name\":\"Judith\"," +
+                                "\"email\":\"Judith@gmail.com\"," +
                                 "\"password\":\"password\"" +
                                 "}")
         )
-        .andExpect( status().isOk())
-        .andExpect( jsonPath( "$.name").value("Saint"));
+                .andExpect(
+                        status().isOk()
+                )
+                .andExpect( jsonPath("$.name").value("John"));
+
     }
 }

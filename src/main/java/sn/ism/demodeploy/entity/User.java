@@ -1,25 +1,23 @@
-package me.essejacques.demotestdeploy.entity;
-
+package sn.ism.demodeploy.entity;
 
 public class User {
-    private Long id;
+    private long id;
     private String name;
     private String adresse;
     private String password;
 
-    public User(Long id, String name, String adresse, String password) {
+    public User(long id, String name, String adresse, String password) {
         this.id = id;
         this.name = name;
         this.adresse = adresse;
         this.password = password;
     }
 
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,4 +44,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
 }

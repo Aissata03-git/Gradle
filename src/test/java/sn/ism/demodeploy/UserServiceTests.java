@@ -1,39 +1,41 @@
-package me.essejacques.demotestdeploy;
+package sn.ism.demodeploy.karate;
 
+import java.util.List;
 
-import me.essejacques.demotestdeploy.entity.User;
-import me.essejacques.demotestdeploy.service.UserServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import sn.ism.demodeploy.entity.User;
+import sn.ism.demodeploy.service.UserServiceImpl;
+
 class UserServiceTests {
+     private UserServiceImpl userService;
 
-    private  UserServiceImpl userService ;
+     @BeforeEach
+     public void setUp(){
+         userService= new UserServiceImpl();
+     }
 
-    @BeforeEach
-    public void setUp(){
-        userService = new UserServiceImpl();
-    }
-
-    @Test
+     @Test
     public void testAddUser(){
-      User  testUser = new User(null, "Stephane", "Stephane@doe.com", "123456");
-      User userSaved = userService.saveUser(testUser);
-        Assertions.assertAll(
-                ()-> Assertions.assertNotNull(userSaved.getId()),
-                ()-> Assertions.assertEquals("Stephane", userSaved.getName()),
-                ()-> Assertions.assertEquals("Stephane@doe.com", userSaved.getAdresse()),
-                ()-> Assertions.assertEquals("123456", userSaved.getPassword())
-        );
-    }
+         User testUser = new  User(10L,"aicha","aicha@dow.com","1i2s3m");
+         User userSaved= userService.saveUser(testUser);
+         Assertions.assertAll(
+                 ()->Assertions.assertNotNull(10L, userSaved.getId()),
+                 ()->Assertions.assertEquals("aicha", userSaved.getName()),
+                 ()->Assertions.assertEquals("aicha@dow.com", userSaved.getAdresse()),
+                 ()->Assertions.assertEquals("1i2s3m", userSaved.getPassword())
+         );
+     }
 
-    @Test
-    public  void findByIdNotFound(){
-        Assertions.assertThrows(
-                RuntimeException.class, ()-> userService.fetchUserById(10000L)
-        );
-    }
+     @Test
+     public void findByIdNotfound(){
+         Assertions.assertThrows(
+                 RuntimeException.class, ()-> userService.fetchUserById(10000L)
+         );
+     }
+
 
     @Test
     void testFetchUserById_ExistingUser() {
@@ -43,7 +45,7 @@ class UserServiceTests {
         assertEquals(1L, existingUser.getId(), "L'ID de l'utilisateur doit être 1.");
         assertEquals("John", existingUser.getName(), "Le nom de l'utilisateur doit être 'John'.");
     }
-
+    
     @Test
     void testFetchUserById_NonExistingUser() {
         Long nonExistingId = 999L;
@@ -69,8 +71,4 @@ class UserServiceTests {
         assertNotNull(fetchedUser, "L'utilisateur doit pouvoir être récupéré après son enregistrement.");
         assertEquals(savedUser.getId(), fetchedUser.getId(), "L'ID de l'utilisateur récupéré doit correspondre à celui sauvegardé.");
     }
-
-
-
-
 }

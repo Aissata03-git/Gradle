@@ -1,4 +1,4 @@
-package me.essejacques.demotestdeploy.karate;
+package sn.ism.demodeploy.karate;
 
 import com.intuit.karate.junit5.Karate;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class UserKarateTests {
 
     @Karate.Test
-    public Karate testAll(){
+    private Karate testAll(){
         return Karate.run()
                 .relativeTo(getClass());
     }
